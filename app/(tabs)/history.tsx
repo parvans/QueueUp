@@ -1,19 +1,25 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+// app/(tabs)/history.tsx
+import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Colors } from '@/constants/colors';
 
-const History = () => {
+export default function HistoryScreen() {
   return (
-    <SafeAreaView style={historyStyles.safe}>
-      <Text>history</Text>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.header}>
+        <Text style={styles.title}>My History</Text>
+      </View>
+      <View style={styles.body}>
+        <Text style={styles.hint}>Past activities will appear here</Text>
+      </View>
     </SafeAreaView>
-  )
+  );
 }
 
-const historyStyles = StyleSheet.create({
-  safe:{
-    flex:1,
-    padding:20
-  }
+const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: Colors.surface },
+  header: { backgroundColor: Colors.primary, padding: 20 },
+  title: { fontSize: 20, fontWeight: '700', color: Colors.white },
+  body: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  hint: { fontSize: 14, color: Colors.textMuted },
 });
-export default History

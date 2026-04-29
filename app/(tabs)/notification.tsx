@@ -1,16 +1,16 @@
-// app/(tabs)/profile.tsx
+// app/(tabs)/notification.tsx
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/colors';
 
-export default function ProfileScreen() {
+export default function NotificationScreen() {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.header}>
-        <Text style={styles.title}>My Profile</Text>
+        <Text style={styles.title}>My Notifications</Text>
       </View>
       <View style={styles.body}>
-        <Text style={styles.hint}>Profile information will appear here</Text>
+        <Text style={styles.hint}>Active notifications will appear here</Text>
       </View>
     </SafeAreaView>
   );

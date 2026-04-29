@@ -70,6 +70,14 @@ export default function TabsLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="notification"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabIcon focused={focused} label="Notifications" symbol="◈" />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
