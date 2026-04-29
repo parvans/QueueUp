@@ -1,19 +1,25 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+// app/(tabs)/tickets.tsx
+import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Colors } from '@/constants/colors';
 
-const Tickets = () => {
+export default function TicketsScreen() {
   return (
-    <SafeAreaView style={ticketsStyles.safe}>
-      <Text>Tickets</Text>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.header}>
+        <Text style={styles.title}>My Tickets</Text>
+      </View>
+      <View style={styles.body}>
+        <Text style={styles.hint}>Active tickets will appear here</Text>
+      </View>
     </SafeAreaView>
-  )
+  );
 }
 
-const ticketsStyles = StyleSheet.create({
-  safe:{
-    flex:1,
-    padding:20
-  }
+const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: Colors.surface },
+  header: { backgroundColor: Colors.primary, padding: 20 },
+  title: { fontSize: 20, fontWeight: '700', color: Colors.white },
+  body: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  hint: { fontSize: 14, color: Colors.textMuted },
 });
-export default Tickets
