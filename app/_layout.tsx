@@ -29,6 +29,13 @@ export default function RootLayout() {
             headerShown:false
           }}
         />
+        {/* <Stack.Screen 
+          name='queue/ticket/[id]'
+          options={{
+            presentation:'card', // slides up from bottom
+            headerShown:false
+          }}
+        /> */}
       </Stack>
 
     </SafeAreaProvider>
