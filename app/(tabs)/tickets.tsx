@@ -1,12 +1,19 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Tickets = () => {
   return (
-    <View>
+    <SafeAreaView style={ticketsStyles.safe}>
       <Text>Tickets</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 
+const ticketsStyles = StyleSheet.create({
+  safe:{
+    flex:1,
+    padding:20
+  }
+});
 export default Tickets
