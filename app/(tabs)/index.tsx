@@ -113,7 +113,7 @@ const MOCK_QUEUES: Queue[] = [
 
 
 const HomeScreen = () => {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState<string | ''>('');
 
   // Filter logic — in Phase 4 this becomes a real search API call
   const queues = MOCK_QUEUES;
