@@ -186,7 +186,7 @@ const HomeScreen = () => {
 }
 
 // ── Small inline components (too small to extract to own files) ──
-const StarPill = ({label, value}:{label:string,value:string}) =>{
+const StarPill = ({label, value}:{label:string; value:string}) =>{
   return (
     <View style={homeStyles.pill}>
       <Text style={homeStyles.pillValue}>{value}</Text>
