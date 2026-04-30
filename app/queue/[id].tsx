@@ -1,5 +1,5 @@
 // app/queue/[id].tsx
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Vibration } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { Colors } from '@/constants/colors';
@@ -31,6 +31,7 @@ export default function QueueDetailScreen() {
   const handleJoin = () =>{
     // In Phase 4: POST /tickets/join, then navigate to ticket screen
     router.push(`/queue/ticket/${queue.id}`);
+    Vibration.vibrate(100)
   }
 
   return (
