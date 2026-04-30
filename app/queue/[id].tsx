@@ -1,5 +1,5 @@
 // app/queue/[id].tsx
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Vibration } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Vibration, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { Colors } from '@/constants/colors';
@@ -7,6 +7,8 @@ import ScreenHeader from '@/components/ScreenHeader';
 import { Queue } from '@/types';
 import Badge from '@/components/Badge';
 import Button from '@/components/Button';
+import { useState } from 'react';
+import CustomSwitch from '@/components/CustomSwitch';
 
 // Mock — replaced in Phase 4
 const MOCK_QUEUE: Queue = {
@@ -21,6 +23,7 @@ const MOCK_QUEUE: Queue = {
 };
 
 export default function QueueDetailScreen() {
+  const [notify,setNotify] = useState<boolean | false>(false)
   // useLocalSearchParams reads the dynamic segment from the URL
   // If you navigate to /queue/hospital-456, id = "hospital-456"
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -33,6 +36,14 @@ export default function QueueDetailScreen() {
     router.push(`/queue/ticket/${queue.id}`);
     Vibration.vibrate(100)
   }
+
+  const handleToggle = (val: boolean) => {
+    setNotify(val);
+    Vibration.vibrate(50);
+  };
+
+  console.log(notify);
+  
 
   return (
     <SafeAreaView style={styles.safe} edges={['left','right','bottom']}>
@@ -63,9 +74,22 @@ export default function QueueDetailScreen() {
               <Text style={styles.toggleSub}>Alert when 2 people are ahead</Text>
             </View>
             {/* Simple toggle — use a Switch component in Phase 4 */}
-            <View style={styles.toggleOn}>
+            {/* <View style={styles.toggleOn}>
               <View style={styles.toggleThumb} />
-            </View>
+            </View> */}
+            {/* <Switch
+              value={notify}
+              onValueChange={handleToggle}
+              trackColor={{
+                false: Colors.border,
+                true: Colors.primary,
+              }}
+              thumbColor={Colors.primarySurface}
+              ios_backgroundColor={Colors.border}
+              
+            /> */}
+
+            <CustomSwitch value={notify} onChange={handleToggle} />
           </View>
         </View>
 
