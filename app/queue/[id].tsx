@@ -6,6 +6,7 @@ import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { Queue } from '@/types';
 import Badge from '@/components/Badge';
+import Button from '@/components/Button';
 
 // Mock — replaced in Phase 4
 const MOCK_QUEUE: Queue = {
@@ -51,9 +52,41 @@ export default function QueueDetailScreen() {
           <InfoRow label='Served today' value={String(queue.totalServedToday)} />
           <InfoRow label='Operating hours' value={String(queue.operatingHours)} highlight last/>
           <InfoRow label='Your turn around' value="~10:42 AM"/>
-          
+        </View>
+
+        {/* Notification toggle */}
+        <View style={styles.card}>
+          <View style={styles.toggleRow}>
+            <View>
+              <Text style={styles.toggleTitle}>Notify me when close</Text>
+              <Text style={styles.toggleSub}>Alert when 2 people are ahead</Text>
+            </View>
+            {/* Simple toggle — use a Switch component in Phase 4 */}
+            <View style={styles.toggleOn}>
+              <View style={styles.toggleThumb} />
+            </View>
+          </View>
+        </View>
+
+        {/* How it works */}
+        <Text style={styles.sectionTitle}>How it works</Text>
+        <View style={styles.card}>
+          <Step num="1" text="Tap Join Queue below" />
+          <Step num="2" text="You'll get a token number instantly" />
+          <Step num="3" text="Watch your position update in real time" />
+          <Step num="4" text="Get notified when you're almost up" last />
         </View>
       </ScrollView>
+
+      {/* Sticky bottom join button */}
+      <View style={styles.footer}>
+        <Button
+         label={queue.status === 'closed' ? 'Queue is Closed': 'Join Queue'}
+         onPress={handleJoin}
+         disabled={queue.status==='closed'}
+         fullWidth
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -69,6 +102,17 @@ const InfoRow = ({
       <Text style={[styles.infoValue, highlight && styles.infoValueHighlight]}>{value}</Text>
     </View>
   )
+}
+
+function Step({ num, text, last }: { num: string; text: string; last?: boolean }) {
+  return (
+    <View style={[styles.step, !last && styles.stepBorder]}>
+      <View style={styles.stepNum}>
+        <Text style={styles.stepNumText}>{num}</Text>
+      </View>
+      <Text style={styles.stepText}>{text}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -115,4 +159,67 @@ const styles = StyleSheet.create({
     fontWeight:'600'
   },
   infoValueHighlight: { color: Colors.primary },
+  toggleRow:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    padding:14,
+    alignItems:'center'
+
+  },
+  toggleTitle: { fontSize: 13, fontWeight: '600', color: Colors.textPrimary },
+  toggleSub: { fontSize: 11, color: Colors.textMuted, marginTop: 2 },
+  toggleOn: {
+    width: 44, height: 26,
+    backgroundColor: Colors.primary,
+    borderRadius: 13,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingHorizontal: 3,
+  },
+  toggleThumb: {
+    width: 20, height: 20,
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+  },
+  sectionTitle:{
+    fontSize:15,
+    fontWeight:'700',
+    color:Colors.textSecondary,
+    marginTop:4
+  },
+  step:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:12,
+    padding:14
+  },
+  stepBorder:{
+    borderBottomWidth:1,
+    borderBottomColor:Colors.border
+  },
+  stepNum:{
+    width:28,
+    height:28,
+    borderRadius:14,
+    backgroundColor:Colors.primarySurface,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  stepNumText:{
+    fontSize:13,
+    fontWeight:'700',
+    color:Colors.primary
+  },
+  stepText:{
+    fontSize:13,
+    color:Colors.textPrimary,
+    flex:1
+  },
+  footer:{
+    padding:16,
+    paddingBottom:28,
+    backgroundColor:Colors.white,
+    borderTopWidth:1,
+    borderTopColor:Colors.border
+  }
 });
