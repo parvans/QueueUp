@@ -12,7 +12,12 @@ const QueueCard = ({ queue }: Props) => {
     
   return (
     <TouchableOpacity
-    style={style.card}
+    style={[
+        style.card,
+        queue.status === 'open' && style.borderOpen,
+        queue.status === 'busy' && style.borderBusy,
+        queue.status === 'closed' && style.borderClose,
+    ]}
     activeOpacity={0.75}
     onPress={()=>router.push(`/queue/${queue.id}`)}
     >
@@ -51,6 +56,9 @@ const style = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,           // Android shadow
     },
+    borderOpen:{borderLeftWidth:3,borderLeftColor:Colors.success},
+    borderBusy:{borderLeftWidth:3,borderLeftColor:Colors.warning},
+    borderClose:{borderLeftWidth:3,borderLeftColor:Colors.danger},
 
     iconBox:{
         backgroundColor:Colors.primarySurface,
