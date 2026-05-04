@@ -1,19 +1,9 @@
-import { User } from "@/types";
-import { apiClient } from "./client";
+// src/api/auth.api.ts
+import { apiClient } from './client';
 
-type RegisterPayload = {
-    name:string;
-    email:string;
-    phone?:string;
-    password:string;
-}
-
-type AuthResponse = {
-    token:string;
-    user:User;
-}
-
-export async function registerAPI(data: RegisterPayload) {
+export async function registerAPI(data: {
+  name: string; email: string; password: string; phone?: string;
+}) {
   const res = await apiClient.post('/auth/register', data);
   return res.data;
 }
