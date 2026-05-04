@@ -1,9 +1,8 @@
 // app/index.tsx
-import { Colors } from '@/constants/colors';
+import Loading from '@/components/Loading';
 import { useAuthStorage } from '@/store/authStore';
 import { Redirect } from 'expo-router';
 import { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
 
 export default function Index() {
   // This is where you'll later check AsyncStorage for an auth token.
@@ -18,9 +17,7 @@ export default function Index() {
 
   if(isLoading){
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator color={Colors.primary} size="large" />
-      </View>
+      <Loading/>
     )
   }
   return user
