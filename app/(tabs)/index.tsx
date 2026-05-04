@@ -1,123 +1,37 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Colors } from '@/constants/colors'
 import { router } from 'expo-router'
 import ScreenHeader from '@/components/ScreenHeader'
 import { Queue } from '@/types'
 import QueueCard from '@/components/QueueCard'
-
-// ── Mock data (replaced with API calls in Phase 4) ──────────────
-const MOCK_QUEUES: Queue[] = [
-  {
-    id: 'q1',
-    name: 'City Hospital – OPD',
-    organization: 'Kozhikode Medical Centre',
-    status: 'busy',
-    waitMinutes: 24,
-    peopleAhead: 12,
-    totalServedToday: 247,
-    operatingHours: '8:00 AM – 5:00 PM',
-  },
-  {
-    id: 'q2',
-    name: 'SBI Branch – Counter 2',
-    organization: 'State Bank of India',
-    status: 'open',
-    waitMinutes: 6,
-    peopleAhead: 3,
-    totalServedToday: 89,
-    operatingHours: '10:00 AM – 4:00 PM',
-  },
-  {
-    id: 'q3',
-    name: 'RTO Office',
-    organization: 'Kerala Motor Vehicles Dept.',
-    status: 'closed',
-    waitMinutes: 0,
-    peopleAhead: 0,
-    totalServedToday: 134,
-    operatingHours: '9:00 AM – 5:00 PM',
-  },
-  {
-    id: 'q4',
-    name: 'Malabar Salon',
-    organization: 'Malabar Premium Salon',
-    status: 'open',
-    waitMinutes: 15,
-    peopleAhead: 5,
-    totalServedToday: 42,
-    operatingHours: '9:00 AM – 8:00 PM',
-  },
-  {
-    id: 'q5',
-    name: 'Aster Clinic – General',
-    organization: 'Aster MIMS',
-    status: 'busy',
-    waitMinutes: 30,
-    peopleAhead: 18,
-    totalServedToday: 310,
-    operatingHours: '8:30 AM – 6:00 PM',
-  },
-  {
-    id: 'q6',
-    name: 'KSRTC Ticket Counter',
-    organization: 'Kerala RTC',
-    status: 'open',
-    waitMinutes: 10,
-    peopleAhead: 4,
-    totalServedToday: 156,
-    operatingHours: '6:00 AM – 10:00 PM',
-  },
-  {
-    id: 'q7',
-    name: 'Passport Seva Kendra',
-    organization: 'Govt. of India',
-    status: 'busy',
-    waitMinutes: 40,
-    peopleAhead: 20,
-    totalServedToday: 98,
-    operatingHours: '9:00 AM – 4:00 PM',
-  },
-  {
-    id: 'q8',
-    name: 'Reliance Smart Billing',
-    organization: 'Reliance Retail',
-    status: 'open',
-    waitMinutes: 8,
-    peopleAhead: 2,
-    totalServedToday: 210,
-    operatingHours: '9:00 AM – 9:00 PM',
-  },
-  {
-    id: 'q9',
-    name: 'Dental Care Unit',
-    organization: 'Baby Memorial Hospital',
-    status: 'open',
-    waitMinutes: 12,
-    peopleAhead: 6,
-    totalServedToday: 67,
-    operatingHours: '10:00 AM – 7:00 PM',
-  },
-  {
-    id: 'q10',
-    name: 'Electricity Board Office',
-    organization: 'KSEB',
-    status: 'closed',
-    waitMinutes: 0,
-    peopleAhead: 0,
-    totalServedToday: 145,
-    operatingHours: '9:00 AM – 3:00 PM',
-  },
-];
-
+import { useQueueStore } from '@/store/queueStore'
+import Loading from '@/components/Loading'
 
 const HomeScreen = () => {
+  const {queues, fetchQueue, fetchQueues, isLoading} = useQueueStore();
   const [code, setCode] = useState<string | ''>('');
 
-  // Filter logic — in Phase 4 this becomes a real search API call
-  const queues = MOCK_QUEUES;
+  useEffect(()=>{
+    fetchQueues();
+  },[]);
 
+  // Filter logic — in Phase 4 this becomes a real search API call
+
+
+  // Map backend response to our Queue type
+  // (backend uses UPPERCASE status, our type uses lowercase)
+  const mappedQueues = queues.map(q => ({
+    ...q,
+    status: q.status.toLowerCase() as any,
+  }));
+
+  if (isLoading && queues.length === 0) {
+    return (
+      <Loading/>
+    );
+  }
 
   return (
     // edges prop controls which sides get safe area padding.
@@ -175,7 +89,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {queues.map(q => (
+        {mappedQueues.map(q => (
           <QueueCard key={q.id} queue={q} />
         ))}
         {/* Bottom padding so last card isn't hidden behind tab bar */}
