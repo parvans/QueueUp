@@ -40,10 +40,7 @@ export default function QueueDetailScreen() {
   const handleToggle = (val: boolean) => {
     setNotify(val);
     Vibration.vibrate(50);
-  };
-
-  console.log(notify);
-  
+  };  
 
   return (
     <SafeAreaView style={styles.safe} edges={['left','right','bottom']}>
@@ -74,9 +71,6 @@ export default function QueueDetailScreen() {
               <Text style={styles.toggleSub}>Alert when 2 people are ahead</Text>
             </View>
             {/* Simple toggle — use a Switch component in Phase 4 */}
-            {/* <View style={styles.toggleOn}>
-              <View style={styles.toggleThumb} />
-            </View> */}
             {/* <Switch
               value={notify}
               onValueChange={handleToggle}
