@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginAPI, registerAPI } from '@/api/auth.api';
+import { socketService } from '@/constants/services/socket';
 
 type User = {
   id: string; 
@@ -39,6 +40,9 @@ export const useAuthStorage = create<AuthStore>((set)=>({
                 ['user', JSON.stringify(user)],
             ]);
             set({user, accessToken, isLoading:true});
+
+            // Connect socket immediately after login
+            await socketService.connect();
 
         } catch (e:any) {
             set({ error: e.response?.data?.error || 'Login failed', isLoading: false });

@@ -64,6 +64,7 @@ class SocketService {
     offQueueUpdated(){
         this.socket?.off('queue:updated');
     }
+    
     offTicketCalled(){
         this.socket?.off('ticket:called');
     }
