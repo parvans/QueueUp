@@ -63,8 +63,12 @@ export const useAuthStorage = create<AuthStore>((set)=>({
         }
     },
     logout: async () => {
+        // Disconnect the socket before clearing tokens
+        await socketService.disconnect();
+
         await AsyncStorage.multiRemove(['accessToken', 'refreshToken', 'user']);
         set({ user: null, accessToken: null });
+
     },
 
   loadFromStorage: async () => {
@@ -73,6 +77,9 @@ export const useAuthStorage = create<AuthStore>((set)=>({
     ]);
     if (token && userStr) {
       set({ accessToken: token, user: JSON.parse(userStr) });
+
+      // Reconnect socket on app relaunch if already logged in
+      await socketService.connect();
     }
   },
     clearError: () => set({ error: null }),
