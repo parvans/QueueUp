@@ -18,7 +18,7 @@ class SocketService {
 
         this.socket = io(SOCKET_URL,{
             auth:{token},
-            transports:['websocket'],
+            transports:['websocket'], // skip long-polling, go straight to WS
             reconnection:true,
             reconnectionAttempts:5,
             reconnectionDelay:2000

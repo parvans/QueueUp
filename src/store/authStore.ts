@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginAPI, registerAPI } from '@/api/auth.api';
-import { socketService } from '@/constants/services/socket';
+import { socketService } from '@/services/socket';
 
 type User = {
   id: string; 
