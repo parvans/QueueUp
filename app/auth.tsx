@@ -1,21 +1,21 @@
-import React, { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  ActivityIndicator,
-  Animated,
-  Alert,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
+import React, { useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Animated,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AuthScreen() {
   const [role, setRole] = useState<"customer" | "business">("customer");
@@ -151,7 +151,7 @@ export default function AuthScreen() {
                   QueueUp
                 </Text>
                 <Text className="text-[13px] font-medium text-[#434655] mt-1 leading-tight">
-                  One account. Every virtual line.
+                  Skip the wait, join virtually
                 </Text>
               </View>
             </View>
@@ -195,11 +195,10 @@ export default function AuthScreen() {
                     color={role === "customer" ? "#131B2E" : "#434655"}
                   />
                   <Text
-                    className={`text-[13px] ${
-                      role === "customer"
+                    className={`text-[13px] ${role === "customer"
                         ? "font-bold text-[#131B2E]"
                         : "font-semibold text-[#434655]"
-                    }`}
+                      }`}
                   >
                     Customer
                   </Text>
@@ -216,11 +215,10 @@ export default function AuthScreen() {
                     color={role === "business" ? "#131B2E" : "#434655"}
                   />
                   <Text
-                    className={`text-[13px] ${
-                      role === "business"
+                    className={`text-[13px] ${role === "business"
                         ? "font-bold text-[#131B2E]"
                         : "font-semibold text-[#434655]"
-                    }`}
+                      }`}
                   >
                     Business / Staff
                   </Text>
@@ -250,15 +248,15 @@ export default function AuthScreen() {
                 {mode === "signin"
                   ? "Sign In to QueueUp"
                   : role === "customer"
-                  ? "Create Customer Account"
-                  : "Register Your Facility"}
+                    ? "Create Customer Account"
+                    : "Register Your Facility"}
               </Text>
               <Text className="text-[13.5px] text-[#434655] mt-1 leading-relaxed">
                 {mode === "signin"
                   ? "Sign in to access your active queue passes and live counter pacing."
                   : role === "customer"
-                  ? "Join queues remotely, track live positions, and eliminate waiting room stress."
-                  : "Deploy digital ticketing, assign counter stations, and pace service volume."}
+                    ? "Join queues remotely, track live positions, and eliminate waiting room stress."
+                    : "Deploy digital ticketing, assign counter stations, and pace service volume."}
               </Text>
             </View>
 
@@ -387,11 +385,10 @@ export default function AuthScreen() {
                   className="flex-row items-center gap-2"
                 >
                   <View
-                    className={`w-4 h-4 rounded border items-center justify-center ${
-                      rememberMe
+                    className={`w-4 h-4 rounded border items-center justify-center ${rememberMe
                         ? "bg-primary border-primary"
                         : "border-[#CBD5E1] bg-white"
-                    }`}
+                      }`}
                   >
                     {rememberMe && (
                       <Ionicons name="checkmark" size={12} color="#FFFFFF" />
