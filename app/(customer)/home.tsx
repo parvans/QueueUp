@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Animated,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  Image,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [isEmptyState, setIsEmptyState] = useState(false);
@@ -106,6 +106,8 @@ export default function HomeScreen() {
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => router.push("/notifications")}
+              accessibilityRole="button"
+              accessibilityLabel="Notifications"
               className="relative w-10 h-10 rounded-full bg-[#EAEDFF] items-center justify-center"
             >
               <Ionicons name="notifications" size={19} color="#131B2E" />
@@ -236,6 +238,8 @@ export default function HomeScreen() {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   onPress={() => router.push("/ticket/A-047")}
+                  accessibilityRole="button"
+                  accessibilityLabel="Show ticket QR code"
                   className="w-11 h-11 bg-[#EAEDFF] rounded-xl items-center justify-center"
                 >
                   <Ionicons name="qr-code" size={18} color="#131B2E" />
@@ -257,6 +261,8 @@ export default function HomeScreen() {
               <TouchableOpacity
                 activeOpacity={0.85}
                 onPress={() => router.push("/(customer)/search")}
+                accessibilityRole="button"
+                accessibilityLabel="Find a Queue"
                 className="w-full h-11 bg-primary rounded-xl flex-row items-center justify-center gap-1.5 shadow-xs"
               >
                 <Text className="text-[14px] font-semibold text-white">
@@ -365,16 +371,14 @@ export default function HomeScreen() {
                     }
                     setActiveCategory(cat.id);
                   }}
-                  className={`items-center justify-center min-w-[76px] py-2.5 px-2 rounded-2xl transition-all ${
-                    isActive
+                  className={`items-center justify-center min-w-[76px] py-2.5 px-2 rounded-2xl transition-all ${isActive
                       ? "bg-primary shadow-xs"
                       : "bg-white border border-[#E2E7FF]"
-                  }`}
+                    }`}
                 >
                   <View
-                    className={`w-9 h-9 rounded-xl items-center justify-center mb-1 ${
-                      isActive ? "bg-white/20" : "bg-[#EAEDFF]"
-                    }`}
+                    className={`w-9 h-9 rounded-xl items-center justify-center mb-1 ${isActive ? "bg-white/20" : "bg-[#EAEDFF]"
+                      }`}
                   >
                     <Ionicons
                       name={cat.icon}
@@ -383,9 +387,8 @@ export default function HomeScreen() {
                     />
                   </View>
                   <Text
-                    className={`text-[12px] font-semibold ${
-                      isActive ? "text-white" : "text-[#131B2E]"
-                    }`}
+                    className={`text-[12px] font-semibold ${isActive ? "text-white" : "text-[#131B2E]"
+                      }`}
                   >
                     {cat.name}
                   </Text>
