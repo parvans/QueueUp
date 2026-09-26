@@ -286,6 +286,13 @@ export default function HomeScreen() {
             <TextInput
               value={searchQuery}
               onChangeText={setSearchQuery}
+              returnKeyType="search"
+              onSubmitEditing={() =>
+                router.push({
+                  pathname: "/(customer)/search",
+                  params: { q: searchQuery.trim() },
+                })
+              }
               placeholder="Search clinics, hospitals, services..."
               placeholderTextColor="#94A3B8"
               className="flex-1 text-[14px] text-[#131B2E] p-0"
