@@ -1,16 +1,16 @@
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  View,
-  Text,
-  Image,
-  Animated,
-  TouchableOpacity,
   ActivityIndicator,
+  Animated,
+  Image,
   StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function SplashScreen() {
   const progressAnim = useRef(new Animated.Value(0.15)).current;
