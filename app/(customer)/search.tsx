@@ -828,7 +828,7 @@ export default function SearchScreen() {
               <TouchableOpacity
                 activeOpacity={0.85}
                 onPress={() => switchSearchState("results")}
-                className="w-full h-12 rounded-xl bg-primary flex-row items-center justify-center gap-2 shadow-xs active:bg-blue-700 mt-1"
+                className="w-full h-12 rounded-xl bg-primary flex-row items-center justify-center gap-2 shadow-xs active:bg-blue-700 mt-10"
               >
                 <Text className="text-[14px] font-bold text-white">
                   Apply Filters (14 places)
