@@ -580,6 +580,8 @@ export default function SearchScreen() {
                     onPress={() => {
                       setSelectedCategory("Medical");
                       setSelectedDistance("Within 5 km");
+                      setOpenNow(true);
+                      setAcceptingDigital(true);
                       setMaxWait("Under 30 min");
                       setSortBy("Shortest Wait");
                     }}
