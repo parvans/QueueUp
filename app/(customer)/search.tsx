@@ -987,6 +987,13 @@ export default function SearchScreen() {
               <TouchableOpacity
                 onPress={() => {
                   setSearchQuery("");
+                  setSelectedCategory("");
+                  setSelectedDistance("");
+                  setOpenNow(false);
+                  setAcceptingDigital(false);
+                  setMaxWait("");
+                  setSortBy("");
+                  setActiveChips([]);
                   switchSearchState("results");
                 }}
                 className="w-full h-11 rounded-xl bg-primary flex-row items-center justify-center gap-1.5 shadow-xs"
