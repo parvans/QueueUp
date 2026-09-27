@@ -127,7 +127,7 @@ export default function SearchScreen() {
 
   const switchSearchState = (newState: SearchViewState) => {
     try {
-      Haptics.selectionAsync();
+      Haptics.selectionAsync().catch(() => {});
     } catch {
       // Haptics fallback
     }
@@ -136,7 +136,7 @@ export default function SearchScreen() {
 
   const clearSearch = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     } catch {
       // Haptics fallback
     }
