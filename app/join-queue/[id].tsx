@@ -275,7 +275,7 @@ export default function JoinQueueConfirmationScreen() {
           // Fallback
         }
         setIsSubmitting(false);
-        router.push(`/booking-success/${facility.id}` as any);
+        router.replace(`/booking-success/${facility.id}` as any);
       }, 2600);
     }
 
