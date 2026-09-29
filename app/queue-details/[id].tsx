@@ -12,6 +12,7 @@ import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
+import { JoinQueueDrawer } from "@/components/queue/JoinQueueDrawer";
 
 type ClinicSimulationState = "normal" | "full" | "paused" | "closed" | "joined";
 
@@ -162,6 +163,7 @@ export default function QueueDetailsScreen() {
   const insets = useSafeAreaInsets();
   const [clinicState, setClinicState] = useState<ClinicSimulationState>("normal");
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isJoinDrawerVisible, setIsJoinDrawerVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastIcon, setToastIcon] = useState<keyof typeof Ionicons.glyphMap>("checkmark-circle");
 
@@ -240,7 +242,12 @@ export default function QueueDetailsScreen() {
     if (clinicState === "joined") {
       router.push("/ticket/A-047" as any);
     } else if (clinicState === "normal") {
-      router.push(`/join-queue/${facility.id}` as any);
+      try {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+      } catch {
+        // Haptics fallback
+      }
+      setIsJoinDrawerVisible(true);
     }
   };
 
@@ -948,6 +955,13 @@ export default function QueueDetailsScreen() {
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* Screen 7: Join Queue Confirmation Bottom Drawer */}
+      <JoinQueueDrawer
+        visible={isJoinDrawerVisible}
+        onClose={() => setIsJoinDrawerVisible(false)}
+        facility={facility}
+      />
     </SafeAreaView>
   );
 }
