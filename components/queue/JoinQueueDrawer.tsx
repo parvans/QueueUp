@@ -93,6 +93,7 @@ export const JoinQueueDrawer: React.FC<JoinQueueDrawerProps> = ({
   // Animations
   const backdropOpacity = useRef(new Animated.Value(0)).current;
   const drawerTranslateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
+  const confirmTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   // Radar / pulse animations for joining state
   const pulseScale1 = useRef(new Animated.Value(1)).current;
@@ -101,6 +102,14 @@ export const JoinQueueDrawer: React.FC<JoinQueueDrawerProps> = ({
   const pulseOpacity2 = useRef(new Animated.Value(0.5)).current;
   const logoBounce = useRef(new Animated.Value(1)).current;
   const spinValue = useRef(new Animated.Value(0)).current;
+
+  // Unmount cleanup: clear all pending confirmation timers
+  useEffect(() => {
+    return () => {
+      confirmTimersRef.current.forEach(clearTimeout);
+      confirmTimersRef.current = [];
+    };
+  }, []);
 
   // Metrics derived from facility
   const inLineCount = facility.defaultMetrics?.inLine ?? 18;
@@ -128,6 +137,9 @@ export const JoinQueueDrawer: React.FC<JoinQueueDrawerProps> = ({
   // Dismiss drawer with downward slide animation
   const handleDismiss = useCallback(() => {
     if (isSubmitting) return;
+
+    confirmTimersRef.current.forEach(clearTimeout);
+    confirmTimersRef.current = [];
 
     try {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
@@ -269,21 +281,24 @@ export const JoinQueueDrawer: React.FC<JoinQueueDrawerProps> = ({
       // Fallback
     }
 
+    confirmTimersRef.current.forEach(clearTimeout);
+    confirmTimersRef.current = [];
+
     setIsSubmitting(true);
     setDrawerMode("joining");
     setJoiningStep(1);
 
     // Progression of joining steps
-    setTimeout(() => {
+    const step2Timer = setTimeout(() => {
       setJoiningStep(2);
     }, 700);
 
-    setTimeout(() => {
+    const step3Timer = setTimeout(() => {
       setJoiningStep(3);
     }, 1400);
 
     // Complete booking and navigate to Booking Success
-    setTimeout(() => {
+    const navigateTimer = setTimeout(() => {
       try {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
       } catch {
@@ -313,6 +328,8 @@ export const JoinQueueDrawer: React.FC<JoinQueueDrawerProps> = ({
         }
       });
     }, 2200);
+
+    confirmTimersRef.current = [step2Timer, step3Timer, navigateTimer];
   };
 
   const spin = spinValue.interpolate({
