@@ -350,8 +350,8 @@ export default function QueueDetailsScreen() {
       bannerAction: "View Ticket",
       buttonText: "View Active Ticket (#A-047)",
       buttonDisabled: false,
-      buttonIcon: "qr-code" as const,
-      btnStyle: "bg-emerald-600 text-white",
+      buttonIcon: "ticket" as const,
+      btnStyle: "bg-emerald-600 text-white items-start pl-6",
       metricPeople: `${facility.defaultMetrics.inLine}`,
       metricWait: "~14",
       metricServing: facility.defaultMetrics.serving,
@@ -667,7 +667,7 @@ export default function QueueDetailsScreen() {
                     <Text className="text-[10px] font-bold text-[#434655] uppercase">
                       Now Serving
                     </Text>
-                    <Ionicons name="restaurant-outline" size={15} color="#007D55" />
+                    <Ionicons name="person-circle-outline" size={15} color="#007D55" />
                   </View>
                   <View className="flex-row items-baseline gap-1 mt-2">
                     <Text className="text-[20px] font-extrabold text-[#131B2E]">
@@ -935,7 +935,7 @@ export default function QueueDetailsScreen() {
             activeOpacity={0.85}
             disabled={stateConfigs.buttonDisabled}
             onPress={handlePrimaryAction}
-            className={`flex-1 h-12 rounded-xl flex-row items-center justify-center gap-2 shadow-xs active:scale-[0.98] ${stateConfigs.btnStyle}`}
+            className={`flex-1 h-12 rounded-xl flex-row items-center justify-center gap-1 shadow-xs active:scale-[0.98] ${stateConfigs.btnStyle}`}
           >
             <Ionicons
               name={stateConfigs.buttonIcon}
@@ -949,9 +949,9 @@ export default function QueueDetailsScreen() {
             >
               {stateConfigs.buttonText}
             </Text>
-            {!stateConfigs.buttonDisabled && (
+            {/* {!stateConfigs.buttonDisabled && (
               <Ionicons name="arrow-forward" size={16} color="#FFFFFF" />
-            )}
+            )} */}
           </TouchableOpacity>
         </View>
       </View>
