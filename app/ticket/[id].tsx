@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Animated,
-  Alert,
-  Share,
-  Image,
-  Modal,
-} from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { router, useLocalSearchParams } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import * as Haptics from "expo-haptics";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Alert,
+  Animated,
+  Image,
+  Modal,
+  ScrollView,
+  Share,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface TicketDetails {
   facilityId: string;
@@ -225,7 +225,7 @@ export default function DigitalTicketScreen() {
 
   const handleFavoritePress = () => {
     try {
-      Haptics.selectionAsync().catch(() => {});
+      Haptics.selectionAsync().catch(() => { });
     } catch {
       // Fallback
     }
@@ -234,10 +234,10 @@ export default function DigitalTicketScreen() {
 
   const handleSharePress = async () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => { });
       await Share.share({
         title: `QueueUp Digital Ticket #${ticket.ticketNumber}`,
-        message: `My active queue pass for ${ticket.facilityName}: Ticket #${ticket.ticketNumber}, ${ticket.inLine} people ahead. Tracked live on QueueUp.`,
+        message: `My active queue pass for ${ticket.facilityName}: Ticket #${ticket.ticketNumber}, ${ticket.inLine} people ahead. Tracked live on QueueUp.`
       });
     } catch {
       // Fallback
@@ -246,7 +246,7 @@ export default function DigitalTicketScreen() {
 
   const handleWalletPress = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => { });
     } catch {
       // Fallback
     }
@@ -258,7 +258,7 @@ export default function DigitalTicketScreen() {
 
   const handleSaveOfflinePress = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => { });
     } catch {
       // Fallback
     }
@@ -270,7 +270,7 @@ export default function DigitalTicketScreen() {
 
   const handleNavigatePress = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => { });
     } catch {
       // Fallback
     }
@@ -282,7 +282,7 @@ export default function DigitalTicketScreen() {
 
   const handleCallPress = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => { });
     } catch {
       // Fallback
     }
@@ -294,7 +294,7 @@ export default function DigitalTicketScreen() {
 
   const handleTrackRadar = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => { });
     } catch {
       // Fallback
     }
@@ -305,7 +305,7 @@ export default function DigitalTicketScreen() {
   const handleConfirmCancelQueue = () => {
     setShowCancelModal(false);
     try {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(() => {});
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(() => { });
     } catch {
       // Fallback
     }
@@ -547,124 +547,18 @@ export default function DigitalTicketScreen() {
                 </Text>
               </View>
 
-              <View className="w-[1px] h-7 bg-[#E2E7FF]" />
+              {/* <View className="w-[1px] h-7 bg-[#E2E7FF]" /> */}
 
-              <View className="flex-1 items-center">
+              {/* <View className="flex-1 items-center">
                 <Text className="text-[10px] font-bold text-[#434655] uppercase mb-0.5">
                   Consult Room
                 </Text>
                 <Text className="text-[14px] font-bold text-[#004AC6]">
                   {ticket.consultRoom}
                 </Text>
-              </View>
+              </View> */}
             </View>
-
-            {/* High-Fidelity Scannable QR & Barcode Section */}
-            <View className="p-5 bg-[#F2F3FF]/70 items-center justify-center text-center mt-1 border-t border-[#EAEDFF]">
-              {/* QR Matrix Mockup Container */}
-              <View className="bg-white p-3.5 rounded-2xl shadow-sm items-center">
-                {/* Visual QR Code Matrix */}
-                <View className="w-36 h-36 bg-white p-1 justify-between">
-                  {/* Top Row: Left Marker, Center Pattern, Right Marker */}
-                  <View className="flex-row justify-between items-start h-9">
-                    {/* Top-Left Finder Marker */}
-                    <View className="w-9 h-9 rounded-lg bg-[#131B2E] p-1.5 items-center justify-center">
-                      <View className="w-full h-full rounded-md bg-white p-1 items-center justify-center">
-                        <View className="w-full h-full rounded bg-[#004AC6]" />
-                      </View>
-                    </View>
-
-                    {/* Top Middle Cells */}
-                    <View className="flex-row gap-1.5 pt-1">
-                      <View className="w-2 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-2 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-2 h-2 rounded bg-[#131B2E]" />
-                    </View>
-
-                    {/* Top-Right Finder Marker */}
-                    <View className="w-9 h-9 rounded-lg bg-[#131B2E] p-1.5 items-center justify-center">
-                      <View className="w-full h-full rounded-md bg-white p-1 items-center justify-center">
-                        <View className="w-full h-full rounded bg-[#004AC6]" />
-                      </View>
-                    </View>
-                  </View>
-
-                  {/* Middle Rows Pattern */}
-                  <View className="gap-1.5 px-0.5">
-                    <View className="flex-row justify-between items-center">
-                      <View className="w-2.5 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-4 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-2 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-5 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-3 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-2 h-2 rounded bg-[#131B2E]" />
-                    </View>
-
-                    <View className="flex-row justify-between items-center">
-                      <View className="w-4 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-2 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-3.5 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-2 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-4 h-2 rounded bg-[#131B2E]" />
-                    </View>
-
-                    <View className="flex-row justify-between items-center">
-                      <View className="w-2 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-5 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-2.5 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-3 h-2 rounded bg-[#131B2E]" />
-                      <View className="w-2 h-2 rounded bg-[#004AC6]" />
-                      <View className="w-3 h-2 rounded bg-[#131B2E]" />
-                    </View>
-                  </View>
-
-                  {/* Bottom Row: Bottom-Left Marker & Bottom Right Pattern */}
-                  <View className="flex-row justify-between items-end h-9">
-                    {/* Bottom-Left Finder Marker */}
-                    <View className="w-9 h-9 rounded-lg bg-[#131B2E] p-1.5 items-center justify-center">
-                      <View className="w-full h-full rounded-md bg-white p-1 items-center justify-center">
-                        <View className="w-full h-full rounded bg-[#004AC6]" />
-                      </View>
-                    </View>
-
-                    {/* Bottom Right Matrix Cells */}
-                    <View className="gap-1.5 items-end">
-                      <View className="flex-row gap-1">
-                        <View className="w-3 h-2 rounded bg-[#131B2E]" />
-                        <View className="w-2 h-2 rounded bg-[#004AC6]" />
-                        <View className="w-4 h-2 rounded bg-[#131B2E]" />
-                      </View>
-                      <View className="flex-row gap-1">
-                        <View className="w-2 h-2 rounded bg-[#004AC6]" />
-                        <View className="w-4 h-2 rounded bg-[#131B2E]" />
-                        <View className="w-2 h-2 rounded bg-[#004AC6]" />
-                      </View>
-                    </View>
-                  </View>
-                </View>
-
-                {/* Dynamic Barcode Strips */}
-                <View className="w-48 h-8 flex-row items-end justify-between mt-3 px-1">
-                  {[6, 4, 8, 7, 5, 8, 4, 8, 6, 5, 8, 4, 8, 6, 7, 8, 6, 8].map((h, i) => (
-                    <View
-                      key={i}
-                      style={{
-                        height: h * 3.5,
-                        width: i % 4 === 0 ? 3 : i % 3 === 0 ? 2 : 1.5,
-                      }}
-                      className="bg-[#131B2E] rounded-full"
-                    />
-                  ))}
-                </View>
-              </View>
-
-              <Text className="text-[12px] text-[#434655] mt-2.5 text-center leading-snug">
-                Show this scannable pass at clinic check-in kiosk or desk
-              </Text>
-              <Text className="text-[11px] font-bold text-[#737686] tracking-widest mt-1">
-                PASSCODE: {ticket.passcode}
-              </Text>
-            </View>
+            
           </Card>
 
           {/* Dynamic Progress Step Meter Card */}
