@@ -9,6 +9,7 @@ import {
   Alert,
   Share,
   Image,
+  Linking,
 } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
@@ -229,14 +230,21 @@ export default function BookingSuccessScreen() {
 
   const handleDirectionsPress = () => {
     try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    } catch {
-      // Fallback
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then(()=>{
+        const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(facility.address)}`;
+        Linking.openURL(url).catch((error)=>{
+          console.error("Error opening directions:", error);
+        });
+      }).catch((error)=>{
+        console.error("Error opening directions:", error);
+      });
+    } catch(err){
+      console.error("Error opening directions:", err);
     }
-    Alert.alert(
-      "Directions",
-      `Opening turn-by-turn navigation to ${facility.name} (${facility.address}).`
-    );
+    // Alert.alert(
+    //   "Directions",
+    //   `Opening turn-by-turn navigation to ${facility.name} (${facility.address}).`
+    // );
   };
 
   return (
@@ -348,8 +356,8 @@ export default function BookingSuccessScreen() {
       >
         <View className="px-4 gap-4">
           {/* Top Modal Dismiss Bar */}
-          <View className="flex-row items-center justify-between w-full pt-1">
-            <View className="flex-row items-center gap-1.5">
+          <View className="flex-row justify-end w-full pt-1">
+            {/* <View className="flex-row items-center gap-1.5">
               <Image
                 source={require("@/assets/images/queueup-logo.png")}
                 style={{ width: 20, height: 20 }}
@@ -358,7 +366,7 @@ export default function BookingSuccessScreen() {
               <Text className="text-[11px] font-bold text-primary tracking-wider uppercase">
                 Confirmed Pass
               </Text>
-            </View>
+            </View> */}
 
             <TouchableOpacity
               accessibilityLabel="Close modal"
@@ -388,7 +396,7 @@ export default function BookingSuccessScreen() {
             </View>
 
             {/* Live Registration Pill */}
-            <View className="flex-row items-center gap-1.5 bg-[#007D55]/15 px-3 py-1 rounded-full mb-1">
+            <View className="flex-row items-center gap-1.5 bg-[#007D55]/15 px-3 py-1 rounded-full mb-1 mt-4">
               <View className="w-2 h-2 rounded-full bg-[#006242]" />
               <Text className="text-[10px] font-bold text-[#006242] tracking-wider uppercase">
                 LIVE REGISTRATION COMPLETED
@@ -451,13 +459,13 @@ export default function BookingSuccessScreen() {
             </View>
 
             {/* Real Notch Metaphor Division */}
-            <View className="relative w-full flex-row items-center justify-between py-1 bg-white overflow-hidden">
+            <View className="relative flex-row items-center justify-between w-full my-1">
               {/* Left Notch */}
-              <View className="w-4 h-6 -ml-2 rounded-r-full bg-[#FAF8FF]" />
+              <View className="w-4 h-6 -ml-5 rounded-r-full bg-[#CBD5E1]" />
               {/* Dashed line */}
               <View className="flex-1 mx-2 h-[1px] border-b-2 border-dashed border-[#CBD5E1]" />
               {/* Right Notch */}
-              <View className="w-4 h-6 -mr-2 rounded-l-full bg-[#FAF8FF]" />
+              <View className="w-4 h-6 -mr-5 rounded-l-full bg-[#CBD5E1]" />
             </View>
 
             {/* Immediate Telemetry Grid (4 Key Metrics) */}

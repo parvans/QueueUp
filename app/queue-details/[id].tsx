@@ -731,13 +731,13 @@ export default function QueueDetailsScreen() {
             </View>
 
             {/* Dashed Perforation divider with Physical Notch Inserts */}
-            <View className="relative py-1 flex-row items-center justify-between">
+            <View className="relative flex-row items-center justify-between w-full my-1">
               {/* Left Notch */}
-              <View className="w-4 h-6 bg-[#FAF8FF] rounded-r-full -ml-2" />
+              <View className="w-4 h-6 bg-[#CBD5E1] rounded-r-full -ml-1" />
               {/* Dashed line */}
-              <View className="flex-1 mx-2 h-[1px] border-b border-dashed border-[#CBD5E1]" />
+              <View className="flex-1 border-b-2 border-dashed border-[#CBD5E1] mx-2" />
               {/* Right Notch */}
-              <View className="w-4 h-6 bg-[#FAF8FF] rounded-l-full -mr-2" />
+              <View className="w-4 h-6 bg-[#CBD5E1] rounded-l-full -mr-1" />
             </View>
 
             {/* Telemetry Sub-row Information */}

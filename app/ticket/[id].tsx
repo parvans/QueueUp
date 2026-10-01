@@ -520,9 +520,9 @@ export default function DigitalTicketScreen() {
 
             {/* Ticket Perforation / Notch Separation */}
             <View className="relative flex-row items-center justify-between w-full my-1">
-              <View className="w-5 h-8 bg-[#FAF8FF] rounded-r-full -ml-0.5" />
+              <View className="w-5 h-8 bg-[#CBD5E1] rounded-r-full -ml-5" />
               <View className="flex-1 border-b-2 border-dashed border-[#CBD5E1] mx-2" />
-              <View className="w-5 h-8 bg-[#FAF8FF] rounded-l-full -mr-0.5" />
+              <View className="w-5 h-8 bg-[#CBD5E1] rounded-l-full -mr-5" />
             </View>
 
             {/* Timeline Schedule Sub-Metrics */}
