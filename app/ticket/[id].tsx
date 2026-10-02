@@ -463,7 +463,7 @@ export default function DigitalTicketScreen() {
               </Text>
 
               {/* Glowing Ticket Number */}
-              <View className="relative items-center justify-center my-1">
+              <View className="relative items-center justify-center my-2 p-2">
                 <View className="absolute -inset-2 bg-blue-100/60 rounded-full" />
                 <Text className="relative text-[48px] font-black text-[#004AC6] tracking-tight leading-none">
                   {ticket.ticketNumber}
