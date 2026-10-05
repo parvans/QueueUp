@@ -7,6 +7,7 @@ import {
   Animated,
   Image,
   Alert,
+  StyleSheet,
 } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -290,9 +291,8 @@ export default function MyQueuesScreen() {
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => handleTabSwitch("active")}
-              className={`flex-1 py-2 rounded-lg flex-row items-center justify-center gap-1.5 ${
-                activeTab === "active" ? "bg-white shadow-sm" : ""
-              }`}
+              className="flex-1 py-2 rounded-lg flex-row items-center justify-center gap-1.5"
+              style={activeTab === "active" ? styles.activeTabPill : undefined}
             >
               <Text
                 className={`text-xs font-bold ${
@@ -320,9 +320,8 @@ export default function MyQueuesScreen() {
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => handleTabSwitch("upcoming")}
-              className={`flex-1 py-2 rounded-lg flex-row items-center justify-center gap-1.5 ${
-                activeTab === "upcoming" ? "bg-white shadow-sm" : ""
-              }`}
+              className="flex-1 py-2 rounded-lg flex-row items-center justify-center gap-1.5"
+              style={activeTab === "upcoming" ? styles.activeTabPill : undefined}
             >
               <Text
                 className={`text-xs font-bold ${
@@ -350,9 +349,8 @@ export default function MyQueuesScreen() {
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => handleTabSwitch("history")}
-              className={`flex-1 py-2 rounded-lg flex-row items-center justify-center gap-1.5 ${
-                activeTab === "history" ? "bg-white shadow-sm" : ""
-              }`}
+              className="flex-1 py-2 rounded-lg flex-row items-center justify-center gap-1.5"
+              style={activeTab === "history" ? styles.activeTabPill : undefined}
             >
               <Text
                 className={`text-xs font-bold ${
@@ -380,7 +378,10 @@ export default function MyQueuesScreen() {
 
         {/* 3. Empty State Container */}
         {isEmptyStatePreview ? (
-          <View className="flex-col items-center justify-center text-center p-8 my-4 rounded-2xl bg-white shadow-md border border-[#E2E8F0]">
+          <View
+            className="flex-col items-center justify-center text-center p-8 my-4 rounded-2xl bg-white border border-[#E2E8F0]"
+            style={styles.cardShadow}
+          >
             <View className="w-20 h-20 rounded-full bg-[#F2F3FF] items-center justify-center mb-4 relative">
               <Ionicons name="ticket-outline" size={40} color="#737686" />
               <View className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#DBE1FF] items-center justify-center">
@@ -400,7 +401,8 @@ export default function MyQueuesScreen() {
             <TouchableOpacity
               activeOpacity={0.85}
               onPress={() => router.push("/(customer)/search" as any)}
-              className="w-full max-w-xs h-12 rounded-xl bg-[#004AC6] flex-row items-center justify-center gap-2 shadow-md active:bg-[#3755C3]"
+              className="w-full max-w-xs h-12 rounded-xl bg-[#004AC6] flex-row items-center justify-center gap-2 active:bg-[#3755C3]"
+              style={styles.buttonShadow}
             >
               <Ionicons name="search" size={18} color="#FFFFFF" />
               <Text className="text-sm font-bold text-white">Find a Queue Nearby</Text>
@@ -438,7 +440,10 @@ export default function MyQueuesScreen() {
                   </View>
 
                   {/* Physical Ticket Canvas */}
-                  <View className="relative rounded-2xl bg-white shadow-lg overflow-hidden border border-[#E2E8F0]">
+                  <View
+                    className="relative rounded-2xl bg-white overflow-hidden border border-[#E2E8F0]"
+                    style={styles.cardShadowLg}
+                  >
                     {/* Upper Half: Status & Telemetry */}
                     <View className="p-4 pb-3 flex-col">
                       {/* Department & Meta */}
@@ -456,7 +461,7 @@ export default function MyQueuesScreen() {
                         </View>
 
                         {/* Live Status Chip */}
-                        <View className="flex-row items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#BDFFDB] shadow-xs">
+                        <View className="flex-row items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#BDFFDB]">
                           <Animated.View
                             style={{ opacity: statusDotAnim }}
                             className="w-2 h-2 rounded-full bg-[#006242]"
@@ -552,7 +557,8 @@ export default function MyQueuesScreen() {
                         <TouchableOpacity
                           activeOpacity={0.85}
                           onPress={() => handleTrackQueue("city-care-clinic")}
-                          className="flex-1 h-12 rounded-xl bg-[#004AC6] flex-row items-center justify-center gap-1.5 shadow-sm active:bg-[#3755C3]"
+                          className="flex-1 h-12 rounded-xl bg-[#004AC6] flex-row items-center justify-center gap-1.5 active:bg-[#3755C3]"
+                          style={styles.buttonShadow}
                         >
                           <Ionicons name="navigate-outline" size={18} color="#FFFFFF" />
                           <Text className="text-sm font-bold text-white">Track Queue</Text>
@@ -561,7 +567,8 @@ export default function MyQueuesScreen() {
                         <TouchableOpacity
                           activeOpacity={0.8}
                           onPress={() => handleViewTicket("A-047")}
-                          className="flex-1 h-12 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex-row items-center justify-center gap-1.5 active:bg-[#F2F3FF]"
+                          className="flex-1 h-12 rounded-xl bg-white border border-[#E2E8F0] flex-row items-center justify-center gap-1.5 active:bg-[#F2F3FF]"
+                          style={styles.cardShadowSm}
                         >
                           <Ionicons name="receipt-outline" size={18} color="#131B2E" />
                           <Text className="text-sm font-semibold text-[#131B2E]">View Ticket</Text>
@@ -580,7 +587,10 @@ export default function MyQueuesScreen() {
                     <Text className="text-xs font-bold text-[#3755C3]">Today</Text>
                   </View>
 
-                  <View className="rounded-2xl bg-white shadow-sm border border-[#E2E8F0] p-4 flex-col">
+                  <View
+                    className="rounded-2xl bg-white border border-[#E2E8F0] p-4 flex-col"
+                    style={styles.cardShadowSm}
+                  >
                     <View className="flex-row items-start justify-between gap-2 mb-3">
                       <View className="flex-1 mr-2">
                         <Text className="text-[10px] font-bold uppercase text-[#3755C3] tracking-wider">
@@ -677,7 +687,8 @@ export default function MyQueuesScreen() {
                         onPress={() =>
                           Alert.alert("State 1: Waiting", "Steady wait, real-time telemetry active.")
                         }
-                        className="w-44 p-3 rounded-xl bg-white shadow-xs border border-[#E2E8F0] flex-col justify-between"
+                        className="w-44 p-3 rounded-xl bg-white border border-[#E2E8F0] flex-col justify-between"
+                        style={styles.cardShadowSm}
                       >
                         <View>
                           <View className="flex-row items-center gap-1.5 mb-1.5">
@@ -707,7 +718,8 @@ export default function MyQueuesScreen() {
                             "Advancing by 1-2 min/turn smoothly."
                           )
                         }
-                        className="w-44 p-3 rounded-xl bg-white shadow-xs border border-[#E2E8F0] flex-col justify-between"
+                        className="w-44 p-3 rounded-xl bg-white border border-[#E2E8F0] flex-col justify-between"
+                        style={styles.cardShadowSm}
                       >
                         <View>
                           <View className="flex-row items-center gap-1.5 mb-1.5">
@@ -732,7 +744,8 @@ export default function MyQueuesScreen() {
                       <TouchableOpacity
                         activeOpacity={0.85}
                         onPress={() => router.push("/near-turn/city-care-clinic" as any)}
-                        className="w-44 p-3 rounded-xl bg-white shadow-xs border border-[#E2E8F0] flex-col justify-between"
+                        className="w-44 p-3 rounded-xl bg-white border border-[#E2E8F0] flex-col justify-between"
+                        style={styles.cardShadowSm}
                       >
                         <View>
                           <View className="flex-row items-center gap-1.5 mb-1.5">
@@ -757,7 +770,8 @@ export default function MyQueuesScreen() {
                       <TouchableOpacity
                         activeOpacity={0.85}
                         onPress={() => router.push("/your-turn/city-care-clinic" as any)}
-                        className="w-44 p-3 rounded-xl bg-white shadow-xs border border-[#E2E8F0] flex-col justify-between"
+                        className="w-44 p-3 rounded-xl bg-white border border-[#E2E8F0] flex-col justify-between"
+                        style={styles.cardShadowSm}
                       >
                         <View>
                           <View className="flex-row items-center gap-1.5 mb-1.5">
@@ -800,7 +814,8 @@ export default function MyQueuesScreen() {
                             "Doctor round or sterilization in progress."
                           )
                         }
-                        className="w-44 p-3 rounded-xl bg-white shadow-xs border border-[#E2E8F0] flex-col justify-between"
+                        className="w-44 p-3 rounded-xl bg-white border border-[#E2E8F0] flex-col justify-between"
+                        style={styles.cardShadowSm}
                       >
                         <View>
                           <View className="flex-row items-center gap-1.5 mb-1.5">
@@ -827,7 +842,8 @@ export default function MyQueuesScreen() {
                         onPress={() =>
                           Alert.alert("State 6: Cancelled", "Service cancelled or rescheduled.")
                         }
-                        className="w-44 p-3 rounded-xl bg-white shadow-xs border border-[#E2E8F0] flex-col justify-between"
+                        className="w-44 p-3 rounded-xl bg-white border border-[#E2E8F0] flex-col justify-between"
+                        style={styles.cardShadowSm}
                       >
                         <View>
                           <View className="flex-row items-center gap-1.5 mb-1.5">
@@ -886,7 +902,8 @@ export default function MyQueuesScreen() {
                       <TouchableOpacity
                         activeOpacity={0.8}
                         onPress={() => handleTrackQueue("city-care-clinic")}
-                        className="p-3 rounded-xl bg-white shadow-xs flex-row items-start gap-3 border border-[#E2E8F0]/70"
+                        className="p-3 rounded-xl bg-white flex-row items-start gap-3 border border-[#E2E8F0]/70"
+                        style={styles.cardShadowSm}
                       >
                         <View className="w-7 h-7 rounded-full bg-[#EAEDFF] items-center justify-center shrink-0 mt-0.5">
                           <Ionicons name="walk" size={16} color="#004AC6" />
@@ -908,7 +925,8 @@ export default function MyQueuesScreen() {
                       <TouchableOpacity
                         activeOpacity={0.8}
                         onPress={() => router.push("/near-turn/city-care-clinic" as any)}
-                        className="p-3 rounded-xl bg-white shadow-xs flex-row items-start gap-3 border border-[#E2E8F0]/70"
+                        className="p-3 rounded-xl bg-white flex-row items-start gap-3 border border-[#E2E8F0]/70"
+                        style={styles.cardShadowSm}
                       >
                         <View className="w-7 h-7 rounded-full bg-orange-100 items-center justify-center shrink-0 mt-0.5">
                           <Ionicons name="timer" size={16} color="#EA580C" />
@@ -930,7 +948,8 @@ export default function MyQueuesScreen() {
                       <TouchableOpacity
                         activeOpacity={0.8}
                         onPress={() => router.push("/your-turn/city-care-clinic" as any)}
-                        className="p-3 rounded-xl bg-white shadow-xs flex-row items-start gap-3 border border-[#E2E8F0]/70"
+                        className="p-3 rounded-xl bg-white flex-row items-start gap-3 border border-[#E2E8F0]/70"
+                        style={styles.cardShadowSm}
                       >
                         <View className="w-7 h-7 rounded-full bg-[#BDFFDB] items-center justify-center shrink-0 mt-0.5">
                           <MaterialIcons name="campaign" size={16} color="#007D55" />
@@ -958,7 +977,10 @@ export default function MyQueuesScreen() {
                   Scheduled Queue Reservations
                 </Text>
 
-                <View className="rounded-2xl bg-white shadow-sm border border-[#E2E8F0] p-4 flex-col">
+                <View
+                  className="rounded-2xl bg-white border border-[#E2E8F0] p-4 flex-col"
+                  style={styles.cardShadowSm}
+                >
                   <View className="flex-row items-start justify-between gap-2 mb-3">
                     <View className="flex-1 mr-2">
                       <Text className="text-[10px] font-bold uppercase text-[#3755C3] tracking-wider">
@@ -1043,7 +1065,8 @@ export default function MyQueuesScreen() {
                 {HISTORY_MOCK_DATA.map((item) => (
                   <View
                     key={item.id}
-                    className="rounded-2xl bg-white p-4 shadow-sm border border-[#E2E8F0] flex-col gap-2.5"
+                    className="rounded-2xl bg-white p-4 border border-[#E2E8F0] flex-col gap-2.5"
+                    style={styles.cardShadowSm}
                   >
                     <View className="flex-row items-start justify-between">
                       <View className="flex-1 mr-2">
@@ -1089,3 +1112,43 @@ export default function MyQueuesScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  activeTabPill: {
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  cardShadowLg: {
+    shadowColor: "#0F172A",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
+  },
+  cardShadow: {
+    shadowColor: "#0F172A",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  cardShadowSm: {
+    shadowColor: "#0F172A",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 1,
+  },
+  buttonShadow: {
+    shadowColor: "#004AC6",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+});
+
