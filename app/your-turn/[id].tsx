@@ -129,18 +129,16 @@ export default function YourTurnScreen() {
 
   // Countdown timer simulation
   useEffect(() => {
-    const timer = setInterval(() => {
-      setRemainingSeconds((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
+    const deadline = Date.now() + facility.initialSeconds * 1000;
+    const tick = () => {
+      const next = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+      setRemainingSeconds(next);
+      if (next === 0) clearInterval(timer);
+    };
+    const timer = setInterval(tick, 1000);
+    tick();
     return () => clearInterval(timer);
-  }, []);
+  }, [facility.id, facility.initialSeconds]);
 
   // Visual attention animations
   useEffect(() => {
