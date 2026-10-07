@@ -40,6 +40,13 @@ export default function CustomerTabsLayout() {
           title: "Profile",
         }}
       />
+      <Tabs.Screen
+        name="edit-profile"
+        options={{
+          href: null,
+          title: "Edit Profile",
+        }}
+      />
     </Tabs>
   );
 }

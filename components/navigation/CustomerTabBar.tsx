@@ -65,7 +65,9 @@ export const CustomerTabBar: React.FC<BottomTabBarProps> = ({
       className="bg-[#FAF8FF]/95 border-t border-[#E2E8F0]"
     >
       <View className="h-16 px-2 flex-row items-center justify-around w-full max-w-[430px] mx-auto">
-        {state.routes.map((route, index) => {
+        {state.routes
+          .filter((route) => Boolean(TAB_CONFIGS[route.name]))
+          .map((route, index) => {
           const { options } = descriptors[route.key];
           const isFocused = state.index === index;
           const config = TAB_CONFIGS[route.name] || {
