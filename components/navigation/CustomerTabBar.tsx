@@ -53,6 +53,15 @@ export const CustomerTabBar: React.FC<BottomTabBarProps> = ({
   navigation,
 }) => {
   const insets = useSafeAreaInsets();
+  const currentRoute = state.routes[state.index];
+  const currentOptions = descriptors[currentRoute?.key]?.options;
+
+  if (
+    currentRoute?.name === "edit-profile" ||
+    (currentOptions?.tabBarStyle as any)?.display === "none"
+  ) {
+    return null;
+  }
 
   return (
     <View
