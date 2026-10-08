@@ -45,6 +45,7 @@ export default function CustomerTabsLayout() {
         options={{
           href: null,
           title: "Edit Profile",
+          tabBarStyle: { display: "none" },
         }}
       />
     </Tabs>
