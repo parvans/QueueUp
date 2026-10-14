@@ -350,7 +350,7 @@ export default function NearTurnAlertScreen() {
 
           <TouchableOpacity
             accessibilityLabel="Profile"
-            onPress={() => router.push("/profile" as any)}
+            onPress={() => router.push("/(customer)/profile" as any)}
             className="w-8 h-8 rounded-full bg-[#004AC6] items-center justify-center ml-1"
           >
             <Ionicons name="person" size={16} color="#FFFFFF" />

@@ -7,9 +7,17 @@ import { Ionicons } from "@expo/vector-icons";
 export default function NotificationsPlaceholder() {
   return (
     <SafeAreaView className="flex-1 bg-[#FAF8FF]">
-      <View className="px-5 py-3 flex-row items-center gap-3 border-b border-border bg-white">
+      <View className="px-5 py-3 flex-row items-center gap-3 border-b border-[#E2E8F0] bg-white">
         <TouchableOpacity
-          onPress={() => router.back()}
+          accessibilityLabel="Go back"
+          accessibilityRole="button"
+          onPress={() => {
+            if (router.canGoBack()) {
+              router.back();
+            } else {
+              router.replace("/(customer)/home" as any);
+            }
+          }}
           className="w-9 h-9 rounded-full bg-slate-100 items-center justify-center"
         >
           <Ionicons name="arrow-back" size={20} color="#0F172A" />
@@ -17,10 +25,12 @@ export default function NotificationsPlaceholder() {
         <Text className="text-lg font-bold text-[#131B2E]">Notifications</Text>
       </View>
       <View className="flex-1 items-center justify-center p-6">
-        <Ionicons name="notifications-outline" size={48} color="#2563EB" />
-        <Text className="text-xl font-bold text-[#131B2E] mt-3">Notifications</Text>
-        <Text className="text-sm text-[#434655] text-center mt-1">
-          Full screen to be implemented in Screen 16.
+        <View className="w-16 h-16 rounded-2xl bg-[#EAEDFF] items-center justify-center mb-3">
+          <Ionicons name="notifications-outline" size={32} color="#2563EB" />
+        </View>
+        <Text className="text-xl font-bold text-[#131B2E]">All Caught Up</Text>
+        <Text className="text-sm text-[#434655] text-center mt-1 max-w-xs">
+          You have no unread notifications at this time. Live queue alerts will appear here.
         </Text>
       </View>
     </SafeAreaView>

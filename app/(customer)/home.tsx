@@ -69,12 +69,18 @@ export default function HomeScreen() {
         <View className="px-4 pt-2 pb-2 flex-row items-center justify-between">
           <View className="flex-row items-center gap-2.5">
             {/* User Avatar with Online Dot */}
-            <View className="relative">
+            <TouchableOpacity
+              activeOpacity={0.8}
+              accessibilityRole="button"
+              accessibilityLabel="View Profile"
+              onPress={() => router.push("/(customer)/profile" as any)}
+              className="relative"
+            >
               <View className="w-11 h-11 rounded-full bg-[#DBE1FF] items-center justify-center shadow-2xs">
                 <Text className="text-[15px] font-bold text-[#00174B]">PK</Text>
               </View>
               <View className="absolute bottom-0 right-0 w-3 h-3 bg-[#007D55] rounded-full border-2 border-[#FAF8FF]" />
-            </View>
+            </TouchableOpacity>
 
             {/* Greeting */}
             <View>
