@@ -385,7 +385,15 @@ export default function QueueDetailsScreen() {
       <View className="h-14 px-4 bg-white/85 border-b border-[#E2E8F0] flex-row items-center justify-between">
         <View className="flex-row items-center gap-2 min-w-0 flex-1">
           <TouchableOpacity
-            onPress={() => router.back()}
+            accessibilityLabel="Go back"
+            accessibilityRole="button"
+            onPress={() => {
+              if (router.canGoBack()) {
+                router.back();
+              } else {
+                router.replace("/(customer)/home" as any);
+              }
+            }}
             className="w-10 h-10 rounded-full items-center justify-center active:bg-slate-100"
           >
             <Ionicons name="chevron-back" size={24} color="#131B2E" />

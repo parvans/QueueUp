@@ -183,7 +183,11 @@ export default function EditProfileScreen() {
 
       // Return to Profile after showing success state
       setTimeout(() => {
-        router.back();
+        if (router.canGoBack()) {
+          router.back();
+        } else {
+          router.replace("/(customer)/profile" as any);
+        }
       }, 1200);
     }, 1000);
   };
@@ -192,7 +196,11 @@ export default function EditProfileScreen() {
     try {
       Haptics.selectionAsync().catch(() => {});
     } catch {}
-    router.back();
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/(customer)/profile" as any);
+    }
   };
 
   return (

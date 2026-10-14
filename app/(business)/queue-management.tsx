@@ -366,8 +366,15 @@ export default function QueueManagementScreen() {
         <View className="flex-row items-center gap-1.5 flex-1 min-w-0">
           <TouchableOpacity
             accessibilityLabel="Go back"
+            accessibilityRole="button"
             activeOpacity={0.7}
-            onPress={() => router.back()}
+            onPress={() => {
+              if (router.canGoBack()) {
+                router.back();
+              } else {
+                router.replace("/(business)/dashboard" as any);
+              }
+            }}
             className="w-10 h-10 -ml-1 rounded-full items-center justify-center active:bg-[#EAEDFF]"
           >
             <Ionicons name="arrow-back" size={22} color="#131B2E" />
